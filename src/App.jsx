@@ -9,6 +9,7 @@ import DatingPage from './Components/pages/DatingPage';
 function App() {
   const location = useLocation();
   let tg = window.Telegram;
+  console.log('Telegram WebApp:', tg);
   tg.WebApp.expand();
   tg.WebApp.enableClosingConfirmation()
 
