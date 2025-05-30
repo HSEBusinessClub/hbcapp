@@ -44,7 +44,7 @@ const SchedulePage = () => {
         }));
 
         setSchedule(mapped);
-        setFavorites(new Set(favIds)); // предполагаем, что favIds — массив id
+        setFavorites(new Set(favIds.map(event => event.id)));
       } catch (err) {
         console.error('Ошибка при получении данных:', err);
       }
