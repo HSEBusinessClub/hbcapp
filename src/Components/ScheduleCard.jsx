@@ -1,13 +1,13 @@
-// ScheduleCard.jsx
 import React from 'react';
 import './ScheduleCard.css';
 import { Link } from 'react-router-dom';
 import HeartIcon from '../assets/navbar/heart.svg?react';
+import FilledHeartIcon from '../assets/heart-filled.svg?react';
 
-const ScheduleCard = ({ data }) => {
+const ScheduleCard = ({ data, isFavorite, onToggleFavorite }) => {
   return (
-    <Link to={`/speaker/${data.id}`} state={{ speaker: data }} className="schedule-card-link">
-      <div className="schedule-card">
+    <div className="schedule-card">
+      <Link to={`/speaker/${data.id}`} state={{ speaker: data }} className="schedule-card-link">
         <div className="speaker-section">
           <img className="speaker-image" src={data.image_url} alt={data.title} />
           <div className="speaker-info">
@@ -17,13 +17,16 @@ const ScheduleCard = ({ data }) => {
             <div className="tags">
               <div className="tag-location">{data.hall}</div>
               <div className="tag-time">{data.time}</div>
+            </div>
           </div>
         </div>
-        <HeartIcon className="favorite-icon" />
+      </Link>
+      <div className="favorite-icon-wrapper" onClick={onToggleFavorite}>
+        {isFavorite ? <FilledHeartIcon className="favorite-icon filled" /> : <HeartIcon className="favorite-icon" />}
       </div>
     </div>
-    </Link>
   );
 };
 
 export default ScheduleCard;
+
