@@ -18,12 +18,12 @@ const SpeakerPage = () => {
     <div className="speaker-page">
       <h1 className="page-title">О спикере</h1>
       <div className="speaker-card-full">
-        <img src={speaker.image} alt={speaker.speaker} className="speaker-image-full" />
+        <img src={speaker.image_url} alt={speaker.speaker_name} className="speaker-image-full" />
 
         <div className='speaker-info-full'>
           <div className='speaker-main-info'>
-            <div className="speaker-name-full">{speaker.speaker}</div>
-            <div className="speaker-position-full">{speaker.position}</div>
+            <div className="speaker-name-full">{speaker.speaker_name}</div>
+            <div className="speaker-position-full">{speaker.description}</div>
           </div>
           <div className="favorite-icon-full"><HeartIcon /></div>
         </div>
