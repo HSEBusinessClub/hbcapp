@@ -8,9 +8,9 @@ import DatingPage from './Components/pages/DatingPage';
 
 function App() {
   const location = useLocation();
-  //let tg = window.Telegram;
-  //tg.WebApp.expand();
-  //tg.WebApp.enableClosingConfirmation()
+  let tg = window.Telegram;
+  tg.WebApp.expand();
+  tg.WebApp.enableClosingConfirmation()
 
   return (
       <div className='App'>
