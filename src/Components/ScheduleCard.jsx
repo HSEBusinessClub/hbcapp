@@ -13,7 +13,7 @@ const ScheduleCard = ({ data, isFavorite, onToggleFavorite }) => {
           <div className="speaker-info">
             <div className="speaker-name">{data.speaker_name}</div>
             <div className="speaker-position">{data.description}</div>
-            <div className="talk-title">“{data.title}”</div>
+            <div className="talk-title">{data.title}</div>
             <div className="tags">
               <div className="tag-location">{data.hall}</div>
               <div className="tag-time">{data.time}</div>

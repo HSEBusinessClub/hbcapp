@@ -3,18 +3,39 @@ import ScheduleCard from "../ScheduleCard";
 import "./FavoriteSpeakersPage.css";
 
 
-const recommendedSpeaker = {
+const recommendedSpeakers = [
+    {
     id: 2,
-    speaker_name: 'ЕВГЕНИЙ ДАВЫДОВ',
-    description: 'Сооснователь SETTERS',
-    image_url: 'https://experum.ru/uploads/media/avatar/0001/02/thumb_1118_avatar_portrait285.jpeg',
-    title: 'Приоритизация и упрощение: основа роста бизнеса, команды и тебя самого',
+    speaker_name: 'Ринат Алиев',
+    description: 'основатель Educate Online',
+    image_url: 'https://hubspeakers.ru/img/speakers/rinat-aliev/m.jpg',
+    title: 'Как построить команду с 0 и не потерять ее до первых результатов?',
     hall: 'Большой зал',
-    time: '10:00 - 11:00',
-};
+    time: '10:30 - 11:15',
+    },
+    {
+    id: 4,
+    speaker_name: 'Александр Дубовенко',
+    description: 'основатель GOOD WOOD',
+    image_url: 'https://ddom.ru/plugins/phpthumb/phpThumb.php?src=/images/photos/medium/map556.jpg&w=378&h=283&zc=1',
+    title: 'Самоуправляемы организации. Agile и SCRUM в оффлайн-бизнесах',
+    hall: 'Большой зал',
+    time: '12:15 - 13:00',
+    },
+    {
+    id: 9,
+    speaker_name: 'Антон Макаров',
+    description: 'основатель «Диван.ру»',
+    image_url: 'https://cdn.forbes.ru/forbes-static/new/2022/04/4-62603365636fb.jpg',
+    title: 'От 0 до 10: как за 10 лет вырастить одного из лидеров отрасли и достигнуть выручки в 10 млрд',
+    hall: 'Большой зал',
+    time: '17:45 - 18:30',
+    },
+
+];
 
 const FavoriteSpeakersPage = () => {
-  const [tab, setTab] = useState("marked");
+  const [tab, setTab] = useState("recommended");
   const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
@@ -103,11 +124,14 @@ const FavoriteSpeakersPage = () => {
           ))}
 
         {tab === "recommended" && (
-          <ScheduleCard
-            data={recommendedSpeaker}
-            isFavorite={false}
-            onToggleFavorite={() => {}}
-          />
+          recommendedSpeakers.map((recommendedSpeaker) => (
+            <ScheduleCard
+              key={recommendedSpeaker.id}
+              data={recommendedSpeaker}
+              isFavorite={false}
+              onToggleFavorite={() => {}}
+            />
+          ))
         )}
       </div>
     </div>
