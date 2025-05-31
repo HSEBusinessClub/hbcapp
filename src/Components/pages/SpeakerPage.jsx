@@ -28,7 +28,7 @@ const SpeakerPage = () => {
     return <div>Информация о спикере недоступна</div>;
   }
 
-  const googleCalendarUrl = new URL("https://calendar.google.com/calendar/render");
+  const googleCalendarUrl = new URL("https://calendar.google.com/calendar/u/0/r/eventedit");
   googleCalendarUrl.searchParams.set("action", "TEMPLATE");
   googleCalendarUrl.searchParams.set("text", "Форум Бизнес-Клуба НИУ ВШЭ 2025");
   if (speaker.start && speaker.duration) {
