@@ -34,7 +34,7 @@ const SchedulePage = () => {
 
         const now = new Date();
 
-        const mskNow = new Date(now.getTime() + 3 * 60 * 60 * 1000);
+        const mskNow = new Date(now.getTime());
 
         console.log('Текущее время в Москве:', mskNow.toISOString());
 

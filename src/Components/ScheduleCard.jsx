@@ -6,7 +6,7 @@ import FilledHeartIcon from '../assets/heart-filled.svg?react';
 
 const ScheduleCard = ({ data, isFavorite, onToggleFavorite }) => {
   const now = new Date();
-  const mskNow = new Date(now.getTime() + 3 * 60 * 60 * 1000);
+  const mskNow = new Date(now.getTime());
 
   const start = new Date(data.start);
   const end = new Date(start.getTime() + data.duration * 60000);
