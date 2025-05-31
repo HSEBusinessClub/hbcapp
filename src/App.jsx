@@ -7,6 +7,7 @@ import SpeakerPage from './Components/pages/SpeakerPage';
 import DatingPage from './Components/pages/DatingPage';
 import FavoriteSpeakersPage from './Components/pages/FavoriteSpeakersPage';
 import QAPage from './Components/pages/QAPage';
+import PartnersPage from './Components/pages/PartnersPage';
 
 function App() {
   const location = useLocation();
@@ -24,6 +25,7 @@ function App() {
             <Route path="/dating" element={<DatingPage />} />
             <Route path="/favorites" element={<FavoriteSpeakersPage />} />
             <Route path="/qa" element={<QAPage />} />
+            <Route path="/partners" element={<PartnersPage />} />
           </Routes>
           <NavBar />
       </div>

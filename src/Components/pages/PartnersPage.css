@@ -1,0 +1,43 @@
+.partners-page {
+  padding: 20px 16px;
+  width: -webkit-fill-available;
+  background: #fff;
+  color: #000;
+}
+
+.partner-card {
+  border: 1px solid rgba(83, 131, 229, 0.5);
+  border-radius: 16px;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  padding: 12px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.partner-description {
+    display: flex;
+    flex-direction: column;
+}
+
+.partner-image {
+  width: 60px;
+  height: 60px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 12px;
+}
+
+.partner-name {
+  font-family: 'Inter';
+  font-size: 22px;
+}
+
+.partner-description {
+  font-family: 'Gilroy';
+  font-size: 14px;
+}

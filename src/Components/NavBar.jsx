@@ -12,7 +12,7 @@ const NavBar = () => {
   const location = useLocation();
 
   const navItems = [
-    { to: "/bingo", icon: <PlayIcon />, key: "play" },
+    { to: "/partners", icon: <PlayIcon />, key: "play" },
     { to: "/dating", icon: <SearchIcon />, key: "search" },
     { to: "/", icon: <CalendarIcon />, key: "calendar" },
     { to: "/favorites", icon: <HeartIcon />, key: "favorites" },

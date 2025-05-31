@@ -99,7 +99,7 @@ const DatingPage = () => {
             <div className="user-tag">{currentUser.tag}</div>
             <div className="user-description">{currentUser.description}</div>
             <div className="user-meta"><TgIcon /> {currentUser.instagram}</div>
-            <div className="user-meta"><SphereIcon /> {currentUser.interest}</div>
+            {/*<div className="user-meta"><SphereIcon /> {currentUser.interest}</div>*/}
           </div>
         </div>
       ) : (
