@@ -16,6 +16,25 @@
   gap: 12px;
 }
 
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 0 0px rgba(201, 31, 9, 0.0);
+  }
+  50% {
+    box-shadow: 0 0 16px rgba(201, 31, 9, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 0px rgba(201, 31, 9, 0.0);
+  }
+}
+
+.schedule-card.ongoing {
+  border: 2px solid rgba(201, 31, 9, 0.5); /* или любой другой цвет */
+  animation: pulse-glow 2s infinite;
+  transition: border 0.3s ease-in-out;
+}
+
+
 .speaker-section {
   display: flex;
   align-items: center;

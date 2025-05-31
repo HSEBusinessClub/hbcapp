@@ -32,18 +32,31 @@ const SchedulePage = () => {
 
         const [events, favIds] = await Promise.all([eventsRes.json(), favRes.json()]);
 
+        const now = new Date();
+
+        const mskNow = new Date(now.getTime() + 3 * 60 * 60 * 1000);
+
+        console.log('Текущее время в Москве:', mskNow.toISOString());
+
         const mapped = events
-        .sort((a, b) => new Date(a.start) - new Date(b.start))
-        .map((event) => ({
-          id: event.id,
-          speaker_id: event.speaker_id,
-          speaker_name: event.speaker_name,
-          title: event.title,
-          description: event.description,
-          image_url: event.image_url,
-          hall: event.location === 'grand_hall' ? 'Большой зал' : 'Малый зал',
-          time: formatTime(event.start, event.duration),
-        }));
+          .filter(event => {
+            const start = new Date(event.start);
+            const end = new Date(start.getTime() + event.duration * 60000);
+            return end > mskNow; // только будущие или текущие
+          })
+          .sort((a, b) => new Date(a.start) - new Date(b.start))
+          .map(event => ({
+            id: event.id,
+            speaker_id: event.speaker_id,
+            speaker_name: event.speaker_name,
+            title: event.title,
+            description: event.description,
+            image_url: event.image_url,
+            hall: event.location === 'grand_hall' ? 'Большой зал' : 'Малый зал',
+            time: formatTime(event.start, event.duration),
+            start: event.start,
+            duration: event.duration,
+          }));
 
 
         setSchedule(mapped);

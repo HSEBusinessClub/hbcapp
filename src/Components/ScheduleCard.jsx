@@ -5,8 +5,16 @@ import HeartIcon from '../assets/heart.svg?react';
 import FilledHeartIcon from '../assets/heart-filled.svg?react';
 
 const ScheduleCard = ({ data, isFavorite, onToggleFavorite }) => {
+  const now = new Date();
+  const mskNow = new Date(now.getTime() + 3 * 60 * 60 * 1000);
+
+  const start = new Date(data.start);
+  const end = new Date(start.getTime() + data.duration * 60000);
+
+  const isOngoing = mskNow >= start && mskNow <= end;
+
   return (
-    <div className="schedule-card">
+    <div className={`schedule-card ${isOngoing ? 'ongoing' : ''}`}>
       <Link to={`/speaker/${data.id}`} state={{ speaker: data }} className="schedule-card-link">
         <div className="speaker-section">
           <img className="speaker-image" src={data.image_url} alt={data.title} />
@@ -25,7 +33,6 @@ const ScheduleCard = ({ data, isFavorite, onToggleFavorite }) => {
         {isFavorite ? <FilledHeartIcon /> : <HeartIcon />}
       </div>
     </div>
-
   );
 };
 
