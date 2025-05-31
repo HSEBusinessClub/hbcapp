@@ -24,6 +24,17 @@ const SpeakerPage = () => {
   const location = useLocation();
   const { speaker } = location.state || {};
 
+  const speakerLinks = {
+    6: "https://secrets.tbank.ru/lichnyj-opyt/intervyu-sergeya-lebedeva/?utm_referrer=https%3A%2F%2Fwww.google.com%2F",
+    7: "https://www.forbes.ru/healthcare/534234-smena-galsa-kak-osnovatel-lenty-sozdal-odnogo-iz-liderov-rossijskoj-farmindustrii",
+    8: "https://www.forbes.ru/profile/vladimir-evtushenkov",
+    9: "https://secrets.tbank.ru/lichnyj-opyt/anton-makarov-intervy/",
+    10: "https://www.forbes.ru/biznes/422885-lomat-i-stroit-kak-osnovateli-vseinstrumentyru-vyrastili-konkurenta-ikea-i-leroy",
+    11: "https://www.forbes.ru/profile/358987-amiran-mucoev",
+    12: "https://events.vedomosti.ru/speakers/bliznuk-stanislav-1245",
+    20: "https://www.forbes.ru/profile/339991-dmitriy-kalaev"
+  };
+
   if (!speaker) {
     return <div>Информация о спикере недоступна</div>;
   }
@@ -71,6 +82,17 @@ const SpeakerPage = () => {
             </a>
           </div>
         </div>
+
+        {speakerLinks[speaker.id] && (
+            <a
+              href={speakerLinks[speaker.id]}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="speaker-button"
+            >
+              Узнать больше о спикере
+            </a>
+          )}
       </div>
     </div>
   );
