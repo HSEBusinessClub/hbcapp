@@ -25,14 +25,14 @@ const SpeakerPage = () => {
             <div className="speaker-name-full">{speaker.speaker_name}</div>
             <div className="speaker-position-full">{speaker.description}</div>
           </div>
-          <div className="favorite-icon-full"><HeartIcon /></div>
+          {/*<div className="favorite-icon-full"><HeartIcon /></div>*/}
         </div>
 
           <div className="speaker-talk-full">{speaker.title}</div>
 
           <div className='speaker-tag-full'>
             <div className='tag-full'><LocationIcon /> {speaker.hall}</div>
-            <div className='tag-full'>Как пройти в зал <ArrowIcon/></div>
+            <div className='tag-full'>{/*Как пройти в зал <ArrowIcon/>*/}</div>
           </div>
           <div className='speaker-tag-full'>
             <div className='tag-full'><ClockIcon /> {speaker.time}</div>

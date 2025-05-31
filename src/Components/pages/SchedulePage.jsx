@@ -32,7 +32,9 @@ const SchedulePage = () => {
 
         const [events, favIds] = await Promise.all([eventsRes.json(), favRes.json()]);
 
-        const mapped = events.map((event) => ({
+        const mapped = events
+        .sort((a, b) => new Date(a.start) - new Date(b.start))
+        .map((event) => ({
           id: event.id,
           speaker_id: event.speaker_id,
           speaker_name: event.speaker_name,
@@ -42,6 +44,7 @@ const SchedulePage = () => {
           hall: event.location === 'grand_hall' ? 'Большой зал' : 'Малый зал',
           time: formatTime(event.start, event.duration),
         }));
+
 
         setSchedule(mapped);
         setFavorites(new Set(favIds.map(event => event.id)));
