@@ -1,46 +1,87 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './DatingPage.css';
 import TgIcon from '../../assets/tg.svg?react';
 import SphereIcon from '../../assets/sphere.svg?react';
 import DatingIcon from '../../assets/dating.svg?react';
 import CloseIcon from '../../assets/close.svg?react';
 
-const fakeUsers = [
-  {
-    id: 1,
-    name: 'Кузнецов Фёдор',
-    age: 19,
-    tag: 'Нетворкинг',
-    description: 'Коммуникационный дизайнер, интересно развитие в IT',
-    instagram: 'fedya_kuz',
-    interest: 'Предпринимаю / IT',
-    image: 'https://experum.ru/uploads/media/avatar/0001/02/thumb_1118_avatar_portrait285.jpeg'
-  },
-  {
-    id: 2,
-    name: 'Екатерина Волкова',
-    age: 21,
-    tag: 'Образование',
-    description: 'Изучаю поведенческую экономику и менторю школьников',
-    instagram: 'katya_volk',
-    interest: 'Образование / Соцпроекты',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Mizulina_Ekaterina.jpg/1200px-Mizulina_Ekaterina.jpg'
-  }
-];
-
 const DatingPage = () => {
+  const [users, setUsers] = useState([]);
   const [index, setIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
 
-  const handleSwitch = (direction = 1) => {
-    setAnimating(true);
-    setTimeout(() => {
-      setIndex((prev) => (prev + direction + fakeUsers.length) % fakeUsers.length);
-      setAnimating(false);
-    }, 300); // соответствует длительности CSS-анимации
+  const authHeader = {
+    'Authorization': `tma ${window.Telegram.WebApp.initData}`,
   };
 
-  const currentUser = fakeUsers[index];
+  const currentUserId = window.Telegram.WebApp.initDataUnsafe.user.id;
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const [allUsersRes, likedUsersRes] = await Promise.all([
+          fetch('https://hbcapp.ru/users/', { headers: authHeader }),
+          fetch('https://hbcapp.ru/users/liked', { headers: authHeader }),
+        ]);
+
+        if (!allUsersRes.ok || !likedUsersRes.ok) throw new Error('Ошибка загрузки пользователей');
+
+        const [allUsers, likedUsers] = await Promise.all([
+          allUsersRes.json(),
+          likedUsersRes.json(),
+        ]);
+
+        const likedIds = new Set(likedUsers.map(u => u.id));
+
+        const filtered = allUsers.filter(user =>
+          user.dating === true &&
+          user.id !== currentUserId &&
+          !likedIds.has(user.id)
+        ).map(user => ({
+          id: user.id,
+          name: user.full_name,
+          age: user.age,
+          tag: user.goal,
+          description: user.position_description,
+          instagram: user.username,
+          interest: user.position_type,
+          image: user.has_photo
+            ? `https://hbcapp.ru/avatars/${user.telegram_id}.jpg`
+            : `https://hbcapp.ru/avatars/default.jpg`
+        }));
+
+        setUsers(filtered);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
+  const handleSwitch = async (action) => {
+    if (users.length === 0) return;
+    const userId = users[index].id;
+    const url = `https://hbcapp.ru/users/${action}/${userId}`;
+
+    try {
+      await fetch(url, {
+        method: 'POST',
+        headers: authHeader,
+      });
+    } catch (err) {
+      console.error(`Ошибка ${action} пользователя`, err);
+    }
+
+    setAnimating(true);
+    setTimeout(() => {
+      setUsers(prev => prev.filter((_, i) => i !== index));
+      setIndex(0);
+      setAnimating(false);
+    }, 300);
+  };
+
+  const currentUser = users[index];
 
   return (
     <div className="dating-page">
@@ -49,22 +90,28 @@ const DatingPage = () => {
         <div className="dating-btn"><DatingIcon /></div>
       </div>
 
-      <div className={`card-container animated-card ${animating ? 'fade-out' : 'fade-in'}`} key={currentUser.id}>
-        <img src={currentUser.image} alt={currentUser.name} className="user-image" />
+      {currentUser ? (
+        <div className={`card-container animated-card ${animating ? 'fade-out' : 'fade-in'}`} key={currentUser.id}>
+          <img src={currentUser.image} alt={currentUser.name} className="user-image" />
 
-        <div className="user-card">
-          <div className="user-name">{currentUser.name} | {currentUser.age}</div>
-          <div className="user-tag">{currentUser.tag}</div>
-          <div className="user-description">{currentUser.description}</div>
-          <div className="user-meta"><TgIcon /> {currentUser.instagram}</div>
-          <div className="user-meta"><SphereIcon /> {currentUser.interest}</div>
+          <div className="user-card">
+            <div className="user-name">{currentUser.name} | {currentUser.age}</div>
+            <div className="user-tag">{currentUser.tag}</div>
+            <div className="user-description">{currentUser.description}</div>
+            <div className="user-meta"><TgIcon /> {currentUser.instagram}</div>
+            <div className="user-meta"><SphereIcon /> {currentUser.interest}</div>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="no-users">Пока нет новых анкет</div>
+      )}
 
-      <div className="button-row">
-        <button className="btn-skip" onClick={() => handleSwitch(1)}><CloseIcon /></button>
-        <button className="btn-next" onClick={() => handleSwitch(1)}><DatingIcon /></button>
-      </div>
+      {currentUser && (
+        <div className="button-row">
+          <button className="btn-skip" onClick={() => handleSwitch('dislike')}><CloseIcon /></button>
+          <button className="btn-next" onClick={() => handleSwitch('like')}><DatingIcon /></button>
+        </div>
+      )}
     </div>
   );
 };
