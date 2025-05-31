@@ -87,7 +87,7 @@ const DatingPage = () => {
     <div className="dating-page">
       <div className="page-header">
         <h1 className="page-title">Дейтинг</h1>
-        <div className="dating-btn"><DatingIcon /></div>
+        {/*<div className="dating-btn"><DatingIcon /></div>*/}
       </div>
 
       {currentUser ? (
@@ -103,7 +103,7 @@ const DatingPage = () => {
           </div>
         </div>
       ) : (
-        <div className="no-users">Ой, кажется, все подходящие для тебя варианты закончились<br /><br />Возможно ты найдёшь себе тех, кто нужен на лекциях</div>
+        <div className="no-users" style={{color: '#000'}}>Ой, кажется, все подходящие для тебя варианты закончились<br /><br />Возможно ты найдёшь себе тех, кто нужен на лекциях</div>
       )}
 
       {currentUser && (
