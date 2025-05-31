@@ -35,7 +35,7 @@ const DatingPage = () => {
 
         const filtered = allUsers.filter(user =>
           user.dating === true &&
-          user.id !== currentUserId &&
+          user.telegram_id !== currentUserId &&
           !likedIds.has(user.id)
         ).map(user => ({
           id: user.id,
@@ -103,7 +103,7 @@ const DatingPage = () => {
           </div>
         </div>
       ) : (
-        <div className="no-users">Пока нет новых анкет</div>
+        <div className="no-users">Ой, кажется, все подходящие для тебя варианты закончились<br /><br />Возможно ты найдёшь себе тех, кто нужен на лекциях</div>
       )}
 
       {currentUser && (
