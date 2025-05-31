@@ -36,10 +36,10 @@ const SpeakerPage = () => {
           </div>
           <div className='speaker-tag-full'>
             <div className='tag-full'><ClockIcon /> {speaker.time}</div>
-            <div className='tag-full'>Напомнить о событии <ArrowIcon/></div>
+            <div className='tag-full'>{/*Напомнить о событии <ArrowIcon/>*/}</div>
           </div>
 
-        <button className="speaker-button">Узнать больше о спикере</button>
+        {/*<button className="speaker-button">Узнать больше о спикере</button>*/}
       </div>
     </div>
   );
