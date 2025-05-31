@@ -91,7 +91,9 @@
 .speaker-button {
   margin-top: 16px;
   width: 100%;
-  padding: 12px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
   background: transparent;
   text-decoration: none;
   border: 2px solid #000;
