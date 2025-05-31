@@ -5,6 +5,7 @@ import NavBar from './Components/NavBar';
 import SchedulePage from './Components/pages/SchedulePage';
 import SpeakerPage from './Components/pages/SpeakerPage';
 import DatingPage from './Components/pages/DatingPage';
+import FavoriteSpeakersPage from './Components/pages/FavoriteSpeakersPage';
 
 function App() {
   const location = useLocation();
@@ -20,6 +21,7 @@ function App() {
             <Route index element={<SchedulePage />} />
             <Route path="/speaker/:id" element={<SpeakerPage />} />
             <Route path="/dating" element={<DatingPage />} />
+            <Route path="/favorites" element={<FavoriteSpeakersPage />} />
           </Routes>
           <NavBar />
       </div>

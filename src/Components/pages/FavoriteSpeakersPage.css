@@ -1,0 +1,50 @@
+.favorites-page {
+    padding: 20px 16px;
+    width: -webkit-fill-available;
+    background: #fff;
+}
+
+.favorites-title {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.favorites-desc {
+    color: #000;
+    font-size: 14px;
+    margin-top: 16px;
+    margin-bottom: 20px;
+}
+
+.favorites-tabs {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.favorites-tab-btn {
+    padding: 8px 20px;
+    font-size: 12px;
+    font-family: 'Gilroy';
+    text-wrap: nowrap;
+    width: 100%;
+    color: #000;
+    border-bottom: 1px solid #999;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background: #fff;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.favorites-tab-btn.active {
+    border-bottom: 1px solid #000;
+    color: #000;
+}
+
+.favorites-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}

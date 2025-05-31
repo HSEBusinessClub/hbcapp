@@ -21,10 +21,11 @@ const ScheduleCard = ({ data, isFavorite, onToggleFavorite }) => {
           </div>
         </div>
       </Link>
-      <div className="favorite-icon-wrapper" onClick={onToggleFavorite}>
-        {isFavorite ? <FilledHeartIcon className="favorite-icon filled" /> : <HeartIcon className="favorite-icon" />}
+      <div className="favorite-icon" onClick={onToggleFavorite}>
+        {isFavorite ? <FilledHeartIcon /> : <HeartIcon />}
       </div>
     </div>
+
   );
 };
 
