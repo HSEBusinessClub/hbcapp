@@ -8,13 +8,14 @@ import LocationIcon from '../../assets/locationb.svg?react';
 import ArrowIcon from '../../assets/arrowb.svg?react';
 
 const formatToGoogleDate = (startStr, durationMin) => {
-  const start = new Date(startStr);
-  const end = new Date(start.getTime() + durationMin * 60000);
+  const localStart = new Date(startStr);
+  const utcStart = new Date(localStart.getTime() - localStart.getTimezoneOffset() * 60000);
+  const utcEnd = new Date(utcStart.getTime() + durationMin * 60000);
 
   const format = (d) =>
     d.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
 
-  return `${format(start)}/${format(end)}`;
+  return `${format(utcStart)}/${format(utcEnd)}`;
 };
 
 const SpeakerPage = () => {
@@ -23,12 +24,17 @@ const SpeakerPage = () => {
   const location = useLocation();
   const { speaker } = location.state || {};
 
-  const googleCalendarUrl = new URL("https://calendar.google.com/calendar/u/0/r/eventedit");
-  googleCalendarUrl.searchParams.set("text", speaker.title || "Событие форума");
+  if (!speaker) {
+    return <div>Информация о спикере недоступна</div>;
+  }
+
+  const googleCalendarUrl = new URL("https://calendar.google.com/calendar/render");
+  googleCalendarUrl.searchParams.set("action", "TEMPLATE");
+  googleCalendarUrl.searchParams.set("text", "Форум Бизнес-Клуба НИУ ВШЭ 2025");
   if (speaker.start && speaker.duration) {
     googleCalendarUrl.searchParams.set("dates", formatToGoogleDate(speaker.start, speaker.duration));
   }
-  googleCalendarUrl.searchParams.set("details", speaker.description);
+  googleCalendarUrl.searchParams.set("details", speaker.title || "Выступление спикера");
   googleCalendarUrl.searchParams.set("location", speaker.hall || "Площадка форума");
 
   return (
@@ -37,36 +43,34 @@ const SpeakerPage = () => {
       <div className="speaker-card-full">
         <img src={speaker.image_url} alt={speaker.speaker_name} className="speaker-image-full" />
 
-        <div className='speaker-info-full'>
-          <div className='speaker-main-info'>
+        <div className="speaker-info-full">
+          <div className="speaker-main-info">
             <div className="speaker-name-full">{speaker.speaker_name}</div>
             <div className="speaker-position-full">{speaker.description}</div>
           </div>
-          {/*<div className="favorite-icon-full"><HeartIcon /></div>*/}
         </div>
 
         <div className="speaker-talk-full">{speaker.title}</div>
 
-        <div className='speaker-tag-full'>
-          <div className='tag-full'><LocationIcon /> {speaker.hall}</div>
-          <div className='tag-full'>{/*Как пройти в зал <ArrowIcon/>*/}</div>
+        <div className="speaker-tag-full">
+          <div className="tag-full"><LocationIcon /> {speaker.hall}</div>
+          <div className="tag-full">{/*Как пройти в зал <ArrowIcon/>*/}</div>
         </div>
 
-        <div className='speaker-tag-full'>
-          <div className='tag-full'><ClockIcon /> {speaker.time}</div>
-          <div className='tag-full'>
+        <div className="speaker-tag-full">
+          <div className="tag-full"><ClockIcon /> {speaker.time}</div>
+          <div className="tag-full">
             <a
               href={googleCalendarUrl.toString()}
               target="_blank"
               rel="noopener noreferrer"
               className="calendar-link"
+              style={{ color: '#000', fontSize: '16px' }}
             >
               Напомнить о событии <ArrowIcon />
             </a>
           </div>
         </div>
-
-        {/*<button className="speaker-button">Узнать больше о спикере</button>*/}
       </div>
     </div>
   );
