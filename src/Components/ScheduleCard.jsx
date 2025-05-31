@@ -1,7 +1,7 @@
 import React from 'react';
 import './ScheduleCard.css';
 import { Link } from 'react-router-dom';
-import HeartIcon from '../assets/navbar/heart.svg?react';
+import HeartIcon from '../assets/heart.svg?react';
 import FilledHeartIcon from '../assets/heart-filled.svg?react';
 
 const ScheduleCard = ({ data, isFavorite, onToggleFavorite }) => {

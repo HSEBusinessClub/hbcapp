@@ -86,7 +86,7 @@ const DatingPage = () => {
   return (
     <div className="dating-page">
       <div className="page-header">
-        <h1 className="page-title">Дейтинг</h1>
+        <h1 className="page-title">Бизнес-дейтинг</h1>
         {/*<div className="dating-btn"><DatingIcon /></div>*/}
       </div>
 
@@ -98,7 +98,9 @@ const DatingPage = () => {
             <div className="user-name">{currentUser.name} | {currentUser.age}</div>
             <div className="user-tag">{currentUser.tag}</div>
             <div className="user-description">{currentUser.description}</div>
-            <div className="user-meta"><TgIcon /> {currentUser.instagram}</div>
+            <div className="user-meta"><TgIcon /> <a href={`https://t.me/${currentUser.instagram}`} target="_blank" rel="noopener noreferrer">
+    @{currentUser.username}
+  </a></div>
             {/*<div className="user-meta"><SphereIcon /> {currentUser.interest}</div>*/}
           </div>
         </div>
