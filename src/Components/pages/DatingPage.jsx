@@ -16,6 +16,12 @@ const DatingPage = () => {
 
   const currentUserId = window.Telegram.WebApp.initDataUnsafe.user.id;
 
+  const positionTypes = {
+    entrepreneur: "Предприниматель",
+    employee: "Сотрудник в корпорации",
+    student: "Студент",
+  };
+
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -44,7 +50,7 @@ const DatingPage = () => {
           tag: user.goal,
           description: user.position_description,
           instagram: user.username,
-          interest: user.position_type,
+          interest: positionTypes[user.position_type] || "Не указано",
           image: user.has_photo
             ? `https://hbcapp.ru/avatars/${user.telegram_id}.jpg`
             : `https://hbcapp.ru/avatars/default.jpg`
@@ -98,10 +104,10 @@ const DatingPage = () => {
             <div className="user-name">{currentUser.name} | {currentUser.age}</div>
             <div className="user-tag">{currentUser.tag}</div>
             <div className="user-description">{currentUser.description}</div>
-            <div className="user-meta"><TgIcon /> <a href={`https://t.me/${currentUser.instagram}`} target="_blank" rel="noopener noreferrer">
-    @{currentUser.username}
+            <div className="user-meta"><TgIcon /> <a href={`https://t.me/${currentUser.instagram}`} target="_blank" rel="noopener noreferrer" style={{color: '#000', fontSize: '16px'}}>
+    @{currentUser.instagram}
   </a></div>
-            {/*<div className="user-meta"><SphereIcon /> {currentUser.interest}</div>*/}
+            <div className="user-meta"><SphereIcon /> {currentUser.interest}</div>
           </div>
         </div>
       ) : (
