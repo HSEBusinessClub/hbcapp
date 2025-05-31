@@ -6,6 +6,7 @@ import SchedulePage from './Components/pages/SchedulePage';
 import SpeakerPage from './Components/pages/SpeakerPage';
 import DatingPage from './Components/pages/DatingPage';
 import FavoriteSpeakersPage from './Components/pages/FavoriteSpeakersPage';
+import QAPage from './Components/pages/QAPage';
 
 function App() {
   const location = useLocation();
@@ -22,6 +23,7 @@ function App() {
             <Route path="/speaker/:id" element={<SpeakerPage />} />
             <Route path="/dating" element={<DatingPage />} />
             <Route path="/favorites" element={<FavoriteSpeakersPage />} />
+            <Route path="/qa" element={<QAPage />} />
           </Routes>
           <NavBar />
       </div>

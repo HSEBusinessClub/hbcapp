@@ -16,7 +16,7 @@ const NavBar = () => {
     { to: "/dating", icon: <SearchIcon />, key: "search" },
     { to: "/", icon: <CalendarIcon />, key: "calendar" },
     { to: "/favorites", icon: <HeartIcon />, key: "favorites" },
-    { to: "/info", icon: <InfoIcon />, key: "info" },
+    { to: "/qa", icon: <InfoIcon />, key: "info" },
   ];
 
   return (
